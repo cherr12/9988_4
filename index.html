@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <title>손닥피플</title>
+    <!-- 부트스트랩 CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif; /* 변경된 폰트 */
+            background-color: #e9ecef; /* 약간의 회색 바탕색으로 변경 */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15); /* 그림자 효과 강화 */
+        }
+        h2 {
+            color: #007bff; /* 부트스트랩 기본 색상으로 변경 */
+            border-bottom: 1px solid #dee2e6; /* 제목 아래 보더 추가 */
+            padding-bottom: 0.5em; /* 패딩 추가 */
+        }
+        p {
+            color: #333; /* 글자색 변경 */
+        }
+        #comments-section {
+            margin-top: 30px;
+        }
+        textarea {
+            width: 100%; /* 너비 변경 */
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ced4da; /* 변경된 보더 색상 */
+            transition: border 0.2s;
+            margin-bottom: 1em; /* 하단 마진 추가 */
+        }
+        textarea:focus {
+            border-color: #007bff; /* 초점이 맞춰질 때 보더 색상 */
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* 부트스트랩의 초점 그림자 스타일 */
+        }
+        button {
+            background-color: #007bff; /* 버튼 색상 */
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3; /* 호버 상태의 버튼 색상 */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 뒤로가기 버튼 -->
+    <div class="mt-3 ml-3">
+        <a href="https://cherr12.github.io/9988/" class="btn btn-light">←</a> <!-- 버튼 스타일 변경 -->
+    </div>
+
+    <div class="container">
+    <h2>손닥 피플</h2>
+    <p>손목닥터 9988 사업에 참여중이신 분들의 어려움을 조금이라도 도와드리고자 이 앱을 만들어 봤어요.<br> 아직 많이 부족한 앱이지만 조금이라도 도움이 되었으면 좋겠네요.</p> 
+    <p>참고로 이 앱은 광고 수익금을 통해 운영될 예정이에요.<br>제가 여러분께 도움되는 정보를 열심히 업데이트 할 수 있도록 광고 많이 봐주실 거죠?<br>앱이 커져서 이 앱으로 포켓몬고 처럼 손목닥터 9988 참여자들 만나면 겨루기 등을 통해 포인트를 드릴 수 있으면 좋겠네요!</p>
+    <p>그러면 오늘도 모두 건강한 하루 되세요❤️</p>
+
+    <div id="comments-section">
+    
+        <div id="comments-list">
+            <!-- 여기에 댓글이 표시됩니다. -->
+        </div>
+
+        <h4>댓글 남기기</h4>
+        <textarea id="comment-content" rows="3" style="width: 90%;"></textarea><br>
+        <button id="submit-comment">댓글 작성</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // 사용자 ID를 저장하거나 불러오는 함수
+        function getUserID() {
+            var userId = localStorage.getItem('userId');
+            if (!userId) {
+                userId = Math.floor((Math.random() * 1000000) + 1); // 1부터 1000000 사이의 랜덤한 숫자 생성
+                localStorage.setItem('userId', userId);
+            }
+            return userId;
+        }
+
+        // 페이지 로드 시 한 번만 사용자 ID를 확인하거나 생성합니다.
+        var userID = getUserID();
+
+        $('#submit-comment').click(function(){
+            // 사용자가 입력한 댓글 내용
+            var comment = $('#comment-content').val();
+
+            // 댓글 내용 검증 (빈 내용이면 경고)
+            if(comment.trim() == '') {
+                alert('댓글 내용을 입력해주세요.');
+                return;
+            }
+
+            // 댓글과 사용자 ID를 댓글 목록에 추가
+            $('#comments-list').append('<p><strong>사용자#' + userID + ':</strong> ' + comment + '</p>');
+
+            // 댓글 작성란 비우기
+            $('#comment-content').val('');
+        });
+    });
+</script>
+
+</body>
+</html>
